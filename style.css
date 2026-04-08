@@ -44,6 +44,36 @@ body {
     background: var(--white); padding: 12px; border-radius: 15px; text-decoration: none;
     box-shadow: 0 4px 10px rgba(0,0,0,0.03);
 }
+/* Эффект при нажатии на карточку ссылки */
+.link-item {
+    transition: all 0.2s ease; /* Плавность эффекта */
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Эффект для мобильных (активное состояние при нажатии) */
+.link-item:active {
+    transform: scale(0.92); /* Кнопка слегка уменьшается (эффект нажатия) */
+    background-color: #ffffff; /* Делаем фон чуть ярче */
+    box-shadow: 0 2px 8px rgba(138, 43, 226, 0.2); /* Свечение */
+}
+
+/* Добавим небольшое изменение иконки при клике */
+.link-item:active i, 
+.link-item:active .uds-dot {
+    transform: translateY(-3px); /* Иконка немного подпрыгивает */
+    transition: transform 0.2s ease;
+}
+
+/* Если кто-то откроет с компьютера (настоящий ховер) */
+@media (hover: hover) {
+    .link-item:hover {
+        transform: translateY(-5px); /* Кнопка приподнимается */
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+        border: 1px solid var(--purple); /* Появляется тонкая рамка */
+    }
+}
 .link-item span { font-size: 10px; font-weight: 700; color: var(--text); }
 .uds-dot { width: 20px; height: 20px; background: var(--purple); color: white; border-radius: 5px; font-size: 12px; font-weight: 900; display: flex; justify-content: center; align-items: center; }
 
