@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Bitcoin Coffee | Official</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header class="header">
+        <div class="logo-container">
+            <img src="img/Logo Butcoin_4.png" alt="Logo" class="logo-img"> </div>
+        <div class="header-right">
+            <div id="cart-open-btn" class="cart-btn">
+                <i class="fa-solid fa-bag-shopping"></i>
+                <span id="cart-count">0</span>
+            </div>
+            <!-- <div class="burger"><i class="fa-solid fa-bars"></i></div> -->
+        </div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <h1>Твоя ежедневная<br><span class="purple-text">валюта удовольствия</span></h1>
+        </section>
+
+        <section class="links-section">
+            <div class="links-container">
+                <h3>Полезные ссылки</h3>
+                <div class="social-row">
+                    <a href="#" class="link-item">
+                        <i class="fa-brands fa-instagram" style="color: #E1306C;"></i>
+                        <span>Instagram</span>
+                    </a>
+                    <a href="#" class="link-item">
+                        <i class="fa-brands fa-telegram" style="color: #0088cc;"></i>
+                        <span>Telegram</span>
+                    </a>
+                    <a href="#" class="link-item">
+                        <div class="uds-dot">U</div>
+                        <span>UDS App</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+    <section class="promo-section">
+    <div class="slider-box">
+        <div class="slide active">
+            <img src="img/img1.png" alt="Promo 1" class="promo-img">
+        </div>
+        
+        <div class="slide">
+            <img src="img/img2.png" alt="Promo 2" class="promo-img">
+        </div>
+    </div>
+</section>
+
+        <nav class="category-nav">
+            <div class="category-wrapper">
+                <button class="cat-item active" data-target="coffee">Кофе</button>
+                <button class="cat-item" data-target="cold">Холодный Кофе</button>
+                <button class="cat-item" data-target="lemonade">Лимонады</button>
+                <button class="cat-item" data-target="milk">Милкшейки</button>
+                <button class="cat-item" data-target="tea">Смузи</button>
+                <button class="cat-item" data-target="dessert">Фрапкоины</button>
+                <button class="cat-item" data-target="snacks">Фреши</button>
+                <button class="cat-item" data-target="sets">Чай</button>
+            </div>
+        </nav>
+
+        <div class="menu-content">
+            <section id="coffee" class="menu-section">
+                <h2 class="section-title">Классический кофе</h2>
+                <div class="products-grid">
+                    <div class="product-card">
+                        <img src="img/Карамель макиато.png" class="p-img"> <div class="p-info">
+                            <h4>Satoshi Latte</h4>
+                            <p class="p-price">30 000</p>
+                            <button class="p-add" onclick="addItem('Satoshi Latte', 30000)">+</button>
+                        </div>
+                    </div>
+                    <div class="product-card">
+                        <img src="img/Копучино 4.png" class="p-img">
+                        <div class="p-info">
+                            <h4>Crypto Mocha</h4>
+                            <p class="p-price">35 000</p>
+                            <button class="p-add" onclick="addItem('Crypto Mocha', 35000)">+</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="cold" class="menu-section">
+                <h2 class="section-title">Холодный кофе</h2>
+                <div class="products-grid">
+                    <div class="product-card">
+                        <img src="img/Копучино 3.png" class="p-img">
+                        <div class="p-info">
+                            <h4>Iced Frappe</h4>
+                            <p class="p-price">15 000</p>
+                            <button class="p-add" onclick="addItem('Iced Frappe', 15000)">+</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            </div>
+
+        <div class="bottom-actions">
+            <button class="btn-location" onclick="showLoc()">Наши локации</button>
+            <button class="btn-review">Оставить отзыв</button>
+        </div>
+    </main>
+
+    <div id="cart-sidebar" class="sidebar">
+        <div class="sidebar-header">
+            <h2>Корзина</h2>
+            <span id="cart-close-btn" class="close-icon">&times;</span>
+        </div>
+        <div id="cart-items-list" class="sidebar-body">
+            </div>
+        <div class="sidebar-footer">
+            <div class="total-box">Итого: <span id="total-price">0</span> ₽</div>
+            <button class="pay-btn" onclick="openPayment()">ОФОРМИТЬ ЗАКАЗ</button>
+        </div>
+    </div>
+
+    <div id="pay-modal" class="modal-pay">
+        <div class="modal-box">
+            <div class="drag-handle"></div>
+            <h4>Выберите оплату</h4>
+            <div class="pay-options">
+                <button onclick="finishOrder('Click')">Click Express</button>
+                <button onclick="finishOrder('Payme')">Payme</button>
+                <button onclick="finishOrder('Bitcoin')" class="btc-gold">Bitcoin ₿</button>
+            </div>
+            <button class="close-pay" onclick="closePay()">Отмена</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

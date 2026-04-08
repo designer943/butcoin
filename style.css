@@ -1,0 +1,183 @@
+:root {
+    --bg: #F8F6FF;
+    --purple: #8A2BE2;
+    --white: #FFFFFF;
+    --gold: #FFD700;
+    --grey: #F0EDF5;
+    --text: #333;
+}
+
+* { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+html { scroll-behavior: smooth; }
+
+body {
+    margin: 0; font-family: 'Montserrat', sans-serif;
+    background-color: var(--bg); color: var(--text);
+}
+
+/* Header */
+.header {
+    position: fixed; top: 0; width: 100%; height: 70px;
+    background: rgba(255,255,255,0.8); backdrop-filter: blur(10px);
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 0 20px; z-index: 1000; border-bottom: 1px solid rgba(0,0,0,0.05);
+}
+.logo-img { height: 40px; width: auto; object-fit: contain; }
+.cart-btn { position: relative; font-size: 1.5rem; color: var(--purple); cursor: pointer; }
+#cart-count {
+    position: absolute; top: -5px; right: -8px; background: var(--gold);
+    color: black; font-size: 10px; padding: 2px 6px; border-radius: 10px; font-weight: 800;
+}
+
+/* Hero */
+.hero { padding: 90px 20px 10px; text-align: center; }
+.hero h1 { font-size: 1.6rem; font-weight: 800; }
+.purple-text { color: var(--purple); }
+
+/* Links */
+.links-section { padding: 10px 20px; }
+.links-container { background: var(--grey); border-radius: 20px; padding: 20px; text-align: center; }
+.links-container h3 { font-size: 0.75rem; text-transform: uppercase; color: #999; margin-bottom: 15px; }
+.social-row { display: flex; justify-content: space-between; gap: 10px; }
+.link-item {
+    flex: 1; display: flex; flex-direction: column; align-items: center; gap: 8px;
+    background: var(--white); padding: 12px; border-radius: 15px; text-decoration: none;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+}
+.link-item span { font-size: 10px; font-weight: 700; color: var(--text); }
+.uds-dot { width: 20px; height: 20px; background: var(--purple); color: white; border-radius: 5px; font-size: 12px; font-weight: 900; display: flex; justify-content: center; align-items: center; }
+
+/* Slider */
+/* Контейнер всей секции */
+.promo-section {
+    padding: 10px 20px;
+    width: 100%;
+}
+
+/* Основной прямоугольник слайдера */
+.slider-box {
+    width: 100%;
+    /* УБРАЛИ fixed height! Теперь высота зависит от картинки */
+    border-radius: 20px;
+    overflow: hidden; /* Чтобы скруглить углы картинок */
+    position: relative;
+    box-shadow: 0 5px 15px rgba(138, 43, 226, 0.1); /* Легкая тень */
+    
+    /* Супер-прием: заставляем слайды лежать друг на друге, не ломая высоту */
+    display: grid; 
+    grid-template-columns: 1fr;
+}
+
+/* Слайд (как контейнер для картинки) */
+.slide {
+    grid-area: 1 / 1; /* Все слайды занимают одну и ту же ячейку */
+    width: 100%;
+    
+    /* Выравнивание картинки по центру (на всякий случай) */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    /* Эффект плавного переключения */
+    opacity: 0;
+    transition: opacity 0.8s ease-in-out;
+    z-index: 1; /* Неактивные слайды внизу */
+    
+    /* Серый фон по умолчанию (чтобы не было пустоты при загрузке) */
+    background-color: var(--grey, #F0EDF5);
+}
+
+/* Активный слайд (видимый) */
+.slide.active {
+    opacity: 1;
+    z-index: 2; /* Активный слайд сверху */
+    position: relative; /* Чтобы именно он задавал высоту `.slider-box` */
+}
+
+/* Сама картинка. САМОЕ ВАЖНОЕ */
+.promo-img {
+    display: block;      /* Убирает отступы снизу */
+    width: 100%;         /* Растягивается на всю ширину прямоугольника */
+    height: auto;        /* ВЫСОТА ПОДСТРАИВАЕТСЯ АВТОМАТИЧЕСКИ, НЕ ОБРЕЗАЯСЬ */
+    object-fit: contain; /* Гарантирует, что картинка видна целиком */
+}
+/* Sticky Nav */
+.category-nav { position: sticky; top: 70px; background: var(--bg); z-index: 900; padding: 15px 0; border-bottom: 1px solid rgba(0,0,0,0.05); }
+.category-wrapper { display: flex; overflow-x: auto; padding: 0 20px; gap: 10px; scrollbar-width: none; }
+.category-wrapper::-webkit-scrollbar { display: none; }
+.cat-item { background: var(--white); border: 1px solid #EEE; padding: 10px 20px; border-radius: 25px; white-space: nowrap; font-family: inherit; font-weight: 600; font-size: 12px; cursor: pointer; }
+.cat-item.active { background: var(--purple); color: white; border-color: var(--purple); }
+
+/* Menu Section */
+.menu-section { padding: 20px; scroll-margin-top: 140px; }
+.section-title { font-size: 1.2rem; margin-bottom: 50px; border-left: 4px solid var(--gold); padding-left: 10px; }
+.products-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 50px 15px; }
+.product-card { 
+    background: var(--white); 
+    border-radius: 20px; 
+    padding: 15px; 
+    position: relative; 
+    text-align: center; 
+    box-shadow: 0 5px 15px rgba(0,0,0,0.02); 
+    /* Добавим небольшой отступ сверху самой карточки, 
+       чтобы картинкам из первого ряда было куда "вылетать" */
+    margin-top: 20px; 
+}
+
+.p-img { 
+    /* ЖЕСТКО ЗАДАЕМ КВАДРАТНЫЙ РАЗМЕР */
+    width: 110px;  /* Оптимальная ширина */
+    height: 110px; /* Оптимальная высота */
+    
+    /* Это свойство гарантирует, что любая картинка 
+       впишется в этот квадрат БЕЗ ИСКАЖЕНИЙ */
+    object-fit: contain; 
+    
+    /* Позиционирование "вылета" */
+    position: absolute; 
+    top: -45px; /* Картинка поднята ровно наполовину своей высоты */
+    left: 50%; 
+    transform: translateX(-50%); 
+    
+    /* Стили */
+    filter: drop-shadow(0 8px 10px rgba(0,0,0,0.1)); 
+    background-color: transparent; /* Убедись, что нет фона */
+    z-index: 20; /* Картинка ВСЕГДА выше текста и фона карточки */
+}
+
+.p-info { 
+    /* Увеличиваем отступ, чтобы текст начинался ниже картинки */
+    margin-top: 75px; 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.p-info h4 { 
+    font-size: 0.85rem; 
+    margin: 10px 0 5px 0; /* Добавляем отступ сверху заголовка */
+    min-height: 32px; 
+    line-height: 1.2;
+}
+.p-price { color: var(--purple); font-weight: 800; margin-bottom: 10px; }
+.p-add { background: var(--purple); color: white; border: none; width: 40px; height: 40px; border-radius: 12px; font-size: 1.4rem; cursor: pointer; }
+
+/* Sidebars & Modals */
+.sidebar { position: fixed; top: 0; right: -100%; width: 100%; height: 100%; background: var(--white); z-index: 2000; transition: 0.4s; padding: 30px; }
+.sidebar.active { right: 0; }
+.sidebar-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+.close-icon { font-size: 2rem; cursor: pointer; }
+.sidebar-body { height: 60vh; overflow-y: auto; }
+.sidebar-footer { position: absolute; bottom: 30px; left: 30px; right: 30px; }
+.pay-btn { width: 100%; padding: 20px; background: var(--purple); color: white; border: none; border-radius: 20px; font-weight: 800; font-size: 1rem; }
+
+.modal-pay { position: fixed; bottom: -100%; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 3000; display: flex; align-items: flex-end; transition: 0.4s; }
+.modal-pay.active { bottom: 0; }
+.modal-box { background: var(--white); width: 100%; padding: 30px; border-radius: 30px 30px 0 0; text-align: center; }
+.pay-options { display: flex; flex-direction: column; gap: 10px; margin: 20px 0; }
+.pay-options button { padding: 15px; border-radius: 15px; border: 1px solid #EEE; background: #FAFAFA; font-weight: 700; }
+.btc-gold { background: var(--gold) !important; border: none !important; }
+
+.bottom-actions { padding: 20px; display: flex; flex-direction: column; gap: 10px; margin-bottom: 40px; }
+.btn-location { background: var(--purple); color: white; padding: 18px; border: none; border-radius: 15px; font-weight: 800; }
+.btn-review { background: var(--grey); padding: 18px; border: none; border-radius: 15px; font-weight: 700; }
