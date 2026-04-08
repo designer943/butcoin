@@ -15,10 +15,47 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Добавление товара
     window.addItem = function(name, price) {
-        cart.push({ name, price });
-        updateCartUI();
-        if (navigator.vibrate) navigator.vibrate(50);
-    };
+    cart.push({ name, price });
+    updateCartUI();
+    
+    // Эффект полета
+    const btn = event.currentTarget;
+    const btnRect = btn.getBoundingClientRect(); // Координаты кнопки
+    const cartIcon = document.getElementById('cart-open-btn');
+    const cartRect = cartIcon.getBoundingClientRect(); // Координаты корзины
+
+    // Создаем "летающий" элемент
+    const particle = document.createElement('div');
+    particle.className = 'flying-particle';
+    
+    // Устанавливаем начальную позицию (центр кнопки плюс)
+    particle.style.left = `${btnRect.left + btnRect.width / 2}px`;
+    particle.style.top = `${btnRect.top + btnRect.height / 2}px`;
+    
+    document.body.appendChild(particle);
+
+    // Запускаем анимацию в следующем кадре
+    setTimeout(() => {
+        particle.style.left = `${cartRect.left + cartRect.width / 2}px`;
+        particle.style.top = `${cartRect.top + cartRect.height / 2}px`;
+        particle.style.transform = 'scale(0.3)'; // Уменьшаем при подлете
+        particle.style.opacity = '0';
+    }, 10);
+
+    // Удаляем элемент после завершения анимации
+    setTimeout(() => {
+        particle.remove();
+        
+        // Маленький эффект "подпрыгивания" иконки корзины
+        cartIcon.style.transform = 'scale(1.3)';
+        setTimeout(() => {
+            cartIcon.style.transform = 'scale(1)';
+        }, 200);
+        
+    }, 800);
+
+    if (navigator.vibrate) navigator.vibrate(50);
+};
 
     function updateCartUI() {
         const countLabel = document.getElementById('cart-count');
