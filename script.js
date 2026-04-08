@@ -1,4 +1,45 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // --- ЛОГИКА СВАЙПОВ ДЛЯ СЛАЙДЕРА ---
+const sliderBox = document.querySelector('.slider-box');
+let touchStartX = 0;
+let touchEndX = 0;
+
+// Регистрация начала касания
+sliderBox.addEventListener('touchstart', (e) => {
+    touchStartX = e.changedTouches[0].screenX;
+}, { passive: true });
+
+// Регистрация конца касания
+sliderBox.addEventListener('touchend', (e) => {
+    touchEndX = e.changedTouches[0].screenX;
+    handleSwipe();
+}, { passive: true });
+
+// Определение направления свайпа
+function handleSwipe() {
+    const swipeDistance = touchEndX - touchStartX;
+    const threshold = 50; // Минимальное расстояние для срабатывания свайпа
+
+    if (swipeDistance < -threshold) {
+        // Свайп влево — следующий слайд
+        nextSlide();
+    } else if (swipeDistance > threshold) {
+        // Свайп вправо — предыдущий слайд
+        prevSlide();
+    }
+}
+
+// Функция для перехода к предыдущему слайду
+function prevSlide() {
+    const slides = document.querySelectorAll('.slide');
+    if (slides.length === 0) return;
+    
+    slides[sIdx].classList.remove('active');
+    sIdx = (sIdx - 1 + slides.length) % slides.length;
+    slides[sIdx].classList.add('active');
+}
+
+// Убедись, что функция nextSlide у тебя доступна глобально или внутри этого же блока
     
     // --- КОРЗИНА ЛОГИКА ---
     let cart = [];
